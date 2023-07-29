@@ -35,7 +35,7 @@ function App() {
   //   event.preventDefault();
 
   //   try {
-  //     const response = await axios.post('http://localhost:3001/user/register', {
+  //     const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/register`, {
   //       name,
   //       email,
   //       password,
@@ -52,7 +52,7 @@ function App() {
     event.preventDefault();
 
     // try {
-    //   const response = await axios.post('http://localhost:3001/user/register', {
+    //   const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/register`, {
     //     name,
     //     email,
     //     password,
@@ -69,7 +69,7 @@ function App() {
     // }
 
     try {
-      const response = await axios.post('http://localhost:3001/user/register', {name, email, password});
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/register`, {name, email, password});
 
       console.log("Registration Successful");
       console.log('Response:', response.data);
@@ -88,7 +88,7 @@ function App() {
   //   event.preventDefault();
 
   //   try {
-  //     const response = await axios.post('http://localhost:3001/user/login', {
+  //     const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/login`, {
   //       email,
   //       password,
   //     });
@@ -107,7 +107,7 @@ function App() {
     event.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:3001/user/login', {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/user/login`, {
         email,
         password,
       });
@@ -115,7 +115,7 @@ function App() {
       const token = response.data.token;
       setToken(token);
       sessionStorage.setItem('token', token);
-      setShowCreatePost(false); // Set showCreatePost to true
+      setShowCreatePost(true); // Set showCreatePost to true
       console.log('Login successful');
     } catch (error) {
       console.error('Login failed');
@@ -125,7 +125,7 @@ function App() {
 
   const getPosts = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/post/getPosts', {
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/post/getPosts`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -143,7 +143,7 @@ function App() {
   const handleCreatePost = async () => {
     try {
       const response = await axios.post(
-        'http://localhost:3001/post/createPost',
+        `${process.env.REACT_APP_BACKEND_URL}/post/createPost`,
         {
           title: newPost.title,
           content: newPost.content,
@@ -168,7 +168,7 @@ function App() {
   const editPostById = async (postId) => {
     try {
       const response = await axios.put(
-        `http://localhost:3001/post/updatePost/${postId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/post/updatePost/${postId}`,
         {
           title: editPost.title,
           content: editPost.content
@@ -194,7 +194,7 @@ function App() {
   const deletePostById = async (postId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:3001/post/deletePost/${postId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/post/deletePost/${postId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
